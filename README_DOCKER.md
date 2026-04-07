@@ -5,6 +5,7 @@
 Run Ubuntu 24.04-based AI stock analysis system easily with Docker.
 
 ---
+> **Note**: For guided local onboarding, run `python onboard.py` on the host first. This document remains the authoritative path for Docker-specific build/run steps.
 
 ## 📋 Table of Contents
 1. [System Configuration](#-system-configuration)
@@ -450,13 +451,13 @@ docker-compose down -v
 cd /app/prism-insight
 
 # Morning surge analysis
-python3 stock_analysis_orchestrator.py --mode morning
+python3 stock_analysis_orchestrator.py --mode morning --language en
 
 # Afternoon surge analysis
-python3 stock_analysis_orchestrator.py --mode afternoon
+python3 stock_analysis_orchestrator.py --mode afternoon --language en
 
 # Both morning + afternoon
-python3 stock_analysis_orchestrator.py --mode both
+python3 stock_analysis_orchestrator.py --mode both --language en
 ```
 
 ### Data Backup (on Host/Local)

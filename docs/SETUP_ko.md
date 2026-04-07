@@ -87,10 +87,10 @@ docker-compose logs -f
 
 ```bash
 # 수동으로 오전 분석 실행
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram --language ko
 
 # 텔레그램과 함께 실행 (설정된 경우)
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --language ko
 ```
 
 ### Docker 명령어 참조
@@ -130,6 +130,16 @@ cd prism-insight
 pip install -r requirements.txt
 ```
 
+### 권장 CUI 온보딩
+
+Python 의존성 설치 후에는 터미널 온보딩 위자드를 먼저 실행하는 것을 권장합니다.
+
+```bash
+python onboard.py
+```
+
+이 위자드는 로컬 설정 파일을 안전하게 스캐폴딩하고 인증 방식별 다음 실행 명령을 출력합니다. Docker, cron, 무거운 설치 작업은 계속 수동/문서 기반 흐름으로 유지됩니다.
+
 ### 3단계: 설정 파일 준비
 
 예시 파일을 복사하여 설정 파일을 생성합니다:
@@ -154,14 +164,14 @@ cp ./trading/config/kis_devlp.yaml.example ./trading/config/kis_devlp.yaml
 `mcp_agent.secrets.yaml`에 API 키를 입력합니다:
 
 ```yaml
-# 필수
-OPENAI_API_KEY: "sk-..."
+openai:
+  api_key: "sk-..."
 
-# 선택 (전체 기능용)
-ANTHROPIC_API_KEY: "sk-ant-..."
-FIRECRAWL_API_KEY: "fc-..."
-PERPLEXITY_API_KEY: "pplx-..."
+anthropic:
+  api_key: "sk-ant-..."
 ```
+
+> **참고**: 온보딩이 관리하는 시크릿은 `openai.api_key`처럼 중첩된 canonical 경로를 사용하세요. Firecrawl/Perplexity 키는 `mcp_agent.config.yaml`의 각 서버 `env` 블록에 유지합니다.
 
 ### 5단계: MCP 서버 설정
 
@@ -366,7 +376,7 @@ utils/setup_crontab.sh
 
 ```bash
 # 미국 주식 분석 실행
-python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram
+python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram --language ko
 ```
 
 ### 이벤트 기반 트레이딩 시그널
@@ -392,7 +402,7 @@ GCP_CREDENTIALS_PATH="/path/to/service-account.json"
 
 ```bash
 # 텔레그램 없이 오전 분석 실행
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language ko
 ```
 
 ### 개별 구성요소 테스트
@@ -437,7 +447,7 @@ python cores/main.py
 ```bash
 # 코드 또는 환경 변수에서 로그 레벨 설정
 export LOG_LEVEL=DEBUG
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language ko
 ```
 
 ### 로그 파일
@@ -465,7 +475,7 @@ tail -f stock_analysis_*.log
 
 설치 완료 후:
 
-1. **빠른 시작 테스트**: `python stock_analysis_orchestrator.py --mode morning --no-telegram` 실행
+1. **빠른 시작 테스트**: `python stock_analysis_orchestrator.py --mode morning --no-telegram --language ko` 실행
 2. **대시보드 탐색**: [analysis.stocksimulation.kr](https://analysis.stocksimulation.kr/) 방문
 3. **커뮤니티 참여**: [텔레그램 채널](https://t.me/stock_ai_agent) 구독
 4. **커스터마이징**: `cores/agents/` 디렉토리의 에이전트 수정

@@ -2,7 +2,8 @@
 # PRISM-INSIGHT Quick Start Script
 #
 # Usage:
-#   ./quickstart.sh YOUR_OPENAI_API_KEY
+#   ./quickstart.sh
+#   OPENAI_API_KEY=sk-... ./quickstart.sh
 #
 # This script will:
 #   1. Install Python dependencies
@@ -26,16 +27,34 @@ echo -e "${BLUE}║     PRISM-INSIGHT Quick Start          ║${NC}"
 echo -e "${BLUE}║     AI-Powered Stock Analysis          ║${NC}"
 echo -e "${BLUE}╚════════════════════════════════════════╝${NC}"
 echo ""
+echo "Tip: For guided local onboarding, run: python3 onboard.py"
+echo ""
 
-# Check for API key
-if [ -z "$1" ]; then
-    echo -e "${YELLOW}Usage: ./quickstart.sh YOUR_OPENAI_API_KEY${NC}"
-    echo ""
+# Resolve API key without echoing it back to the terminal
+POSITIONAL_KEY=false
+if [ -n "${1:-}" ]; then
+    OPENAI_API_KEY="$1"
+    POSITIONAL_KEY=true
+elif [ -n "${OPENAI_API_KEY:-}" ]; then
+    OPENAI_API_KEY="${OPENAI_API_KEY}"
+else
     echo "Get your API key from: https://platform.openai.com/api-keys"
+    read -rsp "Enter your OpenAI API key (hidden input): " OPENAI_API_KEY
+    echo ""
+fi
+
+if [ -z "${OPENAI_API_KEY}" ]; then
+    echo -e "${RED}Error: OpenAI API key is required.${NC}"
     exit 1
 fi
 
-OPENAI_API_KEY=$1
+if [ "${POSITIONAL_KEY}" = true ]; then
+    echo -e "${YELLOW}Note:${NC} positional API key arguments are kept only for backward compatibility."
+    echo "      Preferred options:"
+    echo "      - python3 onboard.py"
+    echo "      - export OPENAI_API_KEY=sk-... && ./quickstart.sh"
+    echo ""
+fi
 
 # Check Python version
 echo -e "${BLUE}[1/5]${NC} Checking Python version..."
@@ -87,11 +106,11 @@ echo ""
 echo -e "${YELLOW}This may take 3-5 minutes. AI agents are analyzing...${NC}"
 echo ""
 
-python3 demo.py AAPL
+python3 demo.py AAPL --language en
 
 echo ""
 echo "Next steps:"
-echo "  • Try analyzing other stocks: python3 demo.py MSFT"
+echo "  • Try analyzing other stocks: python3 demo.py MSFT --language en"
 echo "  • Run full pipeline: python3 prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram"
 echo "  • Set up Telegram for real-time alerts (see docs/SETUP.md)"
 echo ""

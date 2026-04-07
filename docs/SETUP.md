@@ -87,10 +87,10 @@ docker-compose logs -f
 
 ```bash
 # Run morning analysis manually
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 
 # Run with Telegram (if configured)
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --language en
 ```
 
 ### Docker Commands Reference
@@ -130,6 +130,16 @@ cd prism-insight
 pip install -r requirements.txt
 ```
 
+### Guided CUI Onboarding (Recommended)
+
+After Python dependencies are available, run the terminal onboarding wizard:
+
+```bash
+python onboard.py
+```
+
+It scaffolds local config safely and prints auth-branch-specific next commands. Docker, cron, and heavy installers remain manual/doc-driven flows.
+
 ### Step 3: Prepare Configuration Files
 
 Copy example files to create your configuration:
@@ -154,14 +164,14 @@ cp ./trading/config/kis_devlp.yaml.example ./trading/config/kis_devlp.yaml
 Edit `mcp_agent.secrets.yaml` with your API keys:
 
 ```yaml
-# Required
-OPENAI_API_KEY: "sk-..."
+openai:
+  api_key: "sk-..."
 
-# Optional (for full features)
-ANTHROPIC_API_KEY: "sk-ant-..."
-FIRECRAWL_API_KEY: "fc-..."
-PERPLEXITY_API_KEY: "pplx-..."
+anthropic:
+  api_key: "sk-ant-..."
 ```
+
+> **Note**: Keep onboarding-managed secrets on canonical nested paths such as `openai.api_key`. Firecrawl and Perplexity keys stay in the relevant `mcp_agent.config.yaml` server `env` blocks.
 
 ### Step 5: Configure MCP Servers
 
@@ -366,7 +376,7 @@ For US market analysis (NYSE, NASDAQ):
 
 ```bash
 # Run US analysis
-python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram
+python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 ### Event-Driven Trading Signals
@@ -392,7 +402,7 @@ GCP_CREDENTIALS_PATH="/path/to/service-account.json"
 
 ```bash
 # Run morning analysis without Telegram
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 ### Test Individual Components
@@ -437,7 +447,7 @@ Enable verbose logging:
 ```bash
 # Set log level in code or environment
 export LOG_LEVEL=DEBUG
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 ### Log Files
@@ -465,7 +475,7 @@ tail -f stock_analysis_*.log
 
 After successful setup:
 
-1. **Try the Quick Start**: Run `python stock_analysis_orchestrator.py --mode morning --no-telegram`
+1. **Try the Quick Start**: Run `python stock_analysis_orchestrator.py --mode morning --no-telegram --language en`
 2. **Explore the Dashboard**: Visit [analysis.stocksimulation.kr](https://analysis.stocksimulation.kr/)
 3. **Join the Community**: Subscribe to [Telegram Channel](https://t.me/prism_insight_global_en)
 4. **Customize**: Modify agents in `cores/agents/` directory

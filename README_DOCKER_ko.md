@@ -3,6 +3,7 @@
 Ubuntu 24.04 기반 AI 주식 분석 시스템을 Docker로 간편하게 실행하세요.
 
 ---
+> **참고**: 로컬에서 안내형 온보딩이 필요하면 먼저 호스트에서 `python onboard.py`를 실행하세요. 이 문서는 Docker 전용 빌드/실행 절차의 기준 문서로 유지됩니다.
 
 ## 📋 목차
 1. [시스템 구성](#-시스템-구성)
@@ -448,13 +449,13 @@ docker-compose down -v
 cd /app/prism-insight
 
 # 오전 급등주 분석
-python3 stock_analysis_orchestrator.py --mode morning
+python3 stock_analysis_orchestrator.py --mode morning --language ko
 
 # 오후 급등주 분석
-python3 stock_analysis_orchestrator.py --mode afternoon
+python3 stock_analysis_orchestrator.py --mode afternoon --language ko
 
 # 오전 + 오후 모두
-python3 stock_analysis_orchestrator.py --mode both
+python3 stock_analysis_orchestrator.py --mode both --language ko
 ```
 
 ### 데이터 백업 (호스트/로컬에서)

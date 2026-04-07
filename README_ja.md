@@ -51,7 +51,7 @@
 python -m cores.chatgpt_proxy.oauth_login
 
 # ChatGPTサブスクリプションで実行
-PRISM_OPENAI_AUTH_MODE=chatgpt_oauth python stock_analysis_orchestrator.py --mode morning
+PRISM_OPENAI_AUTH_MODE=chatgpt_oauth python stock_analysis_orchestrator.py --mode morning --language en
 ```
 
 APIの請求ゼロ。同等の高精度分析。既存のサブスクリプションがそのまま活用できます。
@@ -110,19 +110,21 @@ AIが生成したApple Inc.の分析レポートをご覧ください：
 
 ## 60秒で試す（米国株）
 
-PRISM-INSIGHTを最も手軽に試す方法です。必要なのは **OpenAI APIキー** のみです。
+現在の推奨ルートは CUI オンボーディングウィザードです。OpenAI APIキーまたは ChatGPT OAuth を選び、出力言語を指定し、シークレットをコマンドラインに渡さず安全な最初の実行コマンドを生成できます。
 
 ```bash
-# Clone and run the quickstart script
+# Clone and start the CUI onboarding wizard
 git clone https://github.com/dragon1086/prism-insight.git
 cd prism-insight
-./quickstart.sh YOUR_OPENAI_API_KEY
+python onboard.py
 ```
 
-これでApple（AAPL）のAI分析レポートが生成されます。他の銘柄も試せます：
+ローカルオンボーディングでは `python onboard.py` を優先してください。`quickstart.sh` はシェル主体の補助フローとして引き続き利用できます。
+
+ウィザードは Apple（AAPL）のAI分析レポートのような安全な最初の実行コマンドで終えられます。オンボーディング後は他の銘柄も試せます：
 ```bash
-python3 demo.py MSFT              # Microsoft
-python3 demo.py NVDA              # NVIDIA
+python3 demo.py MSFT --language en  # Microsoft
+python3 demo.py NVDA --language en  # NVIDIA
 python3 demo.py TSLA --language ko  # Tesla（韓国語レポート）
 ```
 
@@ -143,7 +145,7 @@ export OPENAI_API_KEY=sk-your-key-here
 docker compose -f docker-compose.quickstart.yml up --build -d
 
 # 3. Run analysis
-docker exec -it prism-quickstart python3 demo.py NVDA
+docker exec -it prism-quickstart python3 demo.py NVDA --language en
 ```
 
 初回実行時はローカルでイメージをビルドするため、数分かかる場合があります。
@@ -181,7 +183,7 @@ cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
 # Edit mcp_agent.config.yaml with KRX credentials (Kakao account)
 
 # 5. Run analysis (no Telegram required!)
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 ### オプションB: Docker（本番環境推奨）
@@ -198,7 +200,7 @@ cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
 docker compose up -d
 
 # 3. Run analysis manually (optional)
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 **詳細セットアップガイド**: [docs/SETUP.md](docs/SETUP.md)
@@ -305,7 +307,7 @@ PRISM-INSIGHTは、**韓国（KOSPI/KOSDAQ）** および **米国（NYSE/NASDAQ
 
 ```bash
 # Run US analysis
-python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram
+python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 
 # With English reports
 python prism-us/us_stock_analysis_orchestrator.py --mode morning --language en

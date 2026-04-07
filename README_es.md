@@ -51,7 +51,7 @@ patrocina con orgullo **PRISM-INSIGHT** — el asistente de IA para inversionist
 python -m cores.chatgpt_proxy.oauth_login
 
 # Ejecutar con tu suscripcion de ChatGPT
-PRISM_OPENAI_AUTH_MODE=chatgpt_oauth python stock_analysis_orchestrator.py --mode morning
+PRISM_OPENAI_AUTH_MODE=chatgpt_oauth python stock_analysis_orchestrator.py --mode morning --language en
 ```
 
 Sin costos de API. El mismo analisis potente. Tu suscripcion existente hace el trabajo.
@@ -110,19 +110,21 @@ Mira un informe de analisis de Apple Inc. generado por IA:
 
 ## Pruebalo en 60 Segundos (Acciones de EE.UU.)
 
-La forma mas rapida de probar PRISM-INSIGHT. Solo requiere una **clave de API de OpenAI**.
+La ruta guiada recomendada ahora usa el asistente CUI de onboarding. Te permite elegir entre clave de API de OpenAI o ChatGPT OAuth, fijar el idioma de salida y generar un primer comando seguro sin pasar secretos por la linea de comandos.
 
 ```bash
-# Clone and run the quickstart script
+# Clone and start the CUI onboarding wizard
 git clone https://github.com/dragon1086/prism-insight.git
 cd prism-insight
-./quickstart.sh YOUR_OPENAI_API_KEY
+python onboard.py
 ```
 
-Esto genera un informe de analisis con IA para Apple (AAPL). Prueba con otras acciones:
+Para onboarding local, prioriza `python onboard.py`. `quickstart.sh` sigue disponible como ayuda para un flujo mas orientado a shell.
+
+El asistente puede terminar con un primer comando seguro, por ejemplo un informe con IA de Apple (AAPL). Despues del onboarding, prueba otras acciones:
 ```bash
-python3 demo.py MSFT              # Microsoft
-python3 demo.py NVDA              # NVIDIA
+python3 demo.py MSFT --language en  # Microsoft
+python3 demo.py NVDA --language en  # NVIDIA
 python3 demo.py TSLA --language ko  # Tesla (informe en coreano)
 ```
 
@@ -143,7 +145,7 @@ export OPENAI_API_KEY=sk-your-key-here
 docker compose -f docker-compose.quickstart.yml up --build -d
 
 # 3. Run analysis
-docker exec -it prism-quickstart python3 demo.py NVDA
+docker exec -it prism-quickstart python3 demo.py NVDA --language en
 ```
 
 La primera ejecución construye la imagen localmente, por lo que puede tardar varios minutos.
@@ -181,7 +183,7 @@ cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
 # Edit mcp_agent.config.yaml with KRX credentials (Kakao account)
 
 # 5. Run analysis (no Telegram required!)
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 ### Opcion B: Docker (Recomendado para Produccion)
@@ -198,7 +200,7 @@ cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
 docker compose up -d
 
 # 3. Run analysis manually (optional)
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 **Guia de Instalacion Completa**: [docs/SETUP.md](docs/SETUP.md)
@@ -305,7 +307,7 @@ El mismo flujo de trabajo impulsado por IA para los mercados estadounidenses:
 
 ```bash
 # Run US analysis
-python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram
+python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 
 # With English reports
 python prism-us/us_stock_analysis_orchestrator.py --mode morning --language en

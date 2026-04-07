@@ -51,7 +51,7 @@ proudly sponsors **PRISM-INSIGHT** - the AI assistant for investors.
 python -m cores.chatgpt_proxy.oauth_login
 
 # Run with your ChatGPT subscription
-PRISM_OPENAI_AUTH_MODE=chatgpt_oauth python stock_analysis_orchestrator.py --mode morning
+PRISM_OPENAI_AUTH_MODE=chatgpt_oauth python stock_analysis_orchestrator.py --mode morning --language en
 ```
 
 Zero API bills. Same powerful analysis. Your existing subscription does the work.
@@ -108,19 +108,21 @@ Watch an AI-generated Apple Inc. analysis report:
 
 ## Try in 60 Seconds (US Stocks)
 
-The fastest way to try PRISM-INSIGHT. Only requires an **OpenAI API key**.
+The recommended guided path now uses the CUI onboarding wizard. It lets you choose an OpenAI API key or ChatGPT OAuth, select the output language, and generate a safe first command without passing secrets on the command line.
 
 ```bash
-# Clone and run the quickstart script
+# Clone and start the CUI onboarding wizard
 git clone https://github.com/dragon1086/prism-insight.git
 cd prism-insight
-./quickstart.sh YOUR_OPENAI_API_KEY
+python onboard.py
 ```
 
-This generates an AI analysis report for Apple (AAPL). Try other stocks:
+Prefer `python onboard.py` for local onboarding. `quickstart.sh` remains available as a shell-first helper when you want that path.
+
+The wizard can end with a safe first command such as an Apple (AAPL) AI analysis report. After onboarding, try other stocks:
 ```bash
-python3 demo.py MSFT              # Microsoft
-python3 demo.py NVDA              # NVIDIA
+python3 demo.py MSFT --language en  # Microsoft
+python3 demo.py NVDA --language en  # NVIDIA
 python3 demo.py TSLA --language ko  # Tesla (Korean report)
 ```
 
@@ -143,7 +145,7 @@ export OPENAI_API_KEY=sk-your-key-here
 docker compose -f docker-compose.quickstart.yml up --build -d
 
 # 3. Run analysis
-docker exec -it prism-quickstart python3 demo.py NVDA
+docker exec -it prism-quickstart python3 demo.py NVDA --language en
 ```
 
 The first run builds the image locally, so it may take several minutes.
@@ -181,7 +183,7 @@ cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
 # Edit mcp_agent.config.yaml with KRX credentials (Kakao account)
 
 # 5. Run analysis (no Telegram required!)
-python stock_analysis_orchestrator.py --mode morning --no-telegram
+python stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 ### Option B: Docker (Recommended for Production)
@@ -198,7 +200,7 @@ cp mcp_agent.secrets.yaml.example mcp_agent.secrets.yaml
 docker compose up -d
 
 # 3. Run analysis manually (optional)
-docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram
+docker exec prism-insight-container python3 stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 ```
 
 **Full Setup Guide**: [docs/SETUP.md](docs/SETUP.md)
@@ -305,7 +307,7 @@ Same AI-powered workflow for US markets:
 
 ```bash
 # Run US analysis
-python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram
+python prism-us/us_stock_analysis_orchestrator.py --mode morning --no-telegram --language en
 
 # With English reports
 python prism-us/us_stock_analysis_orchestrator.py --mode morning --language en
