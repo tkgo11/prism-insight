@@ -1,0 +1,322 @@
+# Instincts generated from https://github.com/tkgo11/prism-insight
+# Generated: 2026-07-12T04:38:57.309Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: prism-insight-commit-conventional
+trigger: "when writing a commit message"
+confidence: 0.85
+domain: git
+source: repo-analysis
+source_repo: https://github.com/tkgo11/prism-insight
+---
+
+# Prism Insight Commit Conventional
+
+## Action
+
+Use conventional commit format with prefixes: chore
+
+## Evidence
+
+- 3 commits analyzed
+- Detected conventional commit pattern
+- Examples: chore: stage autonomous maintenance patch runner, chore: trigger autonomous maintenance workflow
+
+---
+id: prism-insight-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/tkgo11/prism-insight
+---
+
+# Prism Insight Commit Length
+
+## Action
+
+Keep commit messages concise (~46 characters)
+
+## Evidence
+
+- Average commit message length: 46 chars
+- Based on 3 commits
+
+---
+id: prism-insight-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/tkgo11/prism-insight
+---
+
+# Prism Insight Naming Files
+
+## Action
+
+Use kebab-case naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: kebab-case
+
+---
+id: prism-insight-import-relative
+trigger: "when importing modules"
+confidence: 0.75
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/tkgo11/prism-insight
+---
+
+# Prism Insight Import Relative
+
+## Action
+
+Use relative imports for project files
+
+## Evidence
+
+- Import analysis shows relative import pattern
+- Example: import { x } from '../lib/x'
+
+---
+id: prism-insight-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/tkgo11/prism-insight
+---
+
+# Prism Insight Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: prism-insight-test-separate
+trigger: "when writing tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/tkgo11/prism-insight
+---
+
+# Prism Insight Test Separate
+
+## Action
+
+Place tests in the tests/ or __tests__/ directory, mirroring src structure
+
+## Evidence
+
+- Separate test directory pattern detected
+- Tests live in dedicated test folders
+
+---
+id: prism-insight-instinct-file-naming
+trigger: "When creating a new file"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct File Naming
+
+## Action
+
+Name the file using kebab-case
+
+## Evidence
+
+- Pattern in namingConventions.files
+
+---
+id: prism-insight-instinct-function-naming
+trigger: "When defining a new function"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Function Naming
+
+## Action
+
+Use camelCase for the function name
+
+## Evidence
+
+- Pattern in namingConventions.functions
+
+---
+id: prism-insight-instinct-class-naming
+trigger: "When defining a new class"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Class Naming
+
+## Action
+
+Use PascalCase for the class name
+
+## Evidence
+
+- Pattern in namingConventions.classes
+
+---
+id: prism-insight-instinct-constant-naming
+trigger: "When declaring a constant"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Constant Naming
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for the constant name
+
+## Evidence
+
+- Pattern in namingConventions.constants
+
+---
+id: prism-insight-instinct-import-style
+trigger: "When importing modules"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Import Style
+
+## Action
+
+Use relative import paths
+
+## Evidence
+
+- Pattern in importStyle
+
+---
+id: prism-insight-instinct-export-style
+trigger: "When exporting code elements"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Export Style
+
+## Action
+
+Use named exports
+
+## Evidence
+
+- Pattern in exportStyle
+
+---
+id: prism-insight-instinct-test-location
+trigger: "When adding new tests"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Test Location
+
+## Action
+
+Place test files in a separate directory from source files
+
+## Evidence
+
+- Pattern in architecture.folderStructure.testLocation
+
+---
+id: prism-insight-instinct-git-commit-prefix
+trigger: "When making a commit for maintenance or automation"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Git Commit Prefix
+
+## Action
+
+Prefix the commit message with 'chore:'
+
+## Evidence
+
+- Seen in commit 'chore: stage autonomous maintenance patch runner'
+- Seen in commit 'chore: trigger autonomous maintenance workflow'
+- Seen in commit 'chore: add PR-triggered maintenance verifier'
+- Pattern in commits.prefixes
+
+---
+id: prism-insight-instinct-git-commit-format
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Git Commit Format
+
+## Action
+
+Use the conventional commit format: <type>: <description>
+
+## Evidence
+
+- Pattern in commits.type
+- Seen in commit examples
+
+---
+id: prism-insight-instinct-workflow-autonomous-maintenance
+trigger: "When configuring CI/CD workflows"
+confidence: 0.8
+domain: workflow
+source: repo-analysis
+source_repo: tkgo11/prism-insight
+---
+
+# Prism Insight Instinct Workflow Autonomous Maintenance
+
+## Action
+
+Include autonomous maintenance workflows in .github/workflows
+
+## Evidence
+
+- Pattern in architecture.configFiles: .github/workflows/autonomous-maintainer-regime-composition.yml
+- Pattern in architecture.configFiles: .github/workflows/autonomous-maintainer-regime-pr.yml
+
